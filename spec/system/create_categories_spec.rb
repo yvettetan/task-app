@@ -11,6 +11,6 @@ RSpec.describe 'CreateCategories', driver: :selenium_chrome, js: true do
     click_on 'Create Category'
     # expect the page to have the content we submitted
     expect(page).to have_content('title')
-    expect(page).to have_content('category')
+    expect(page).to have_content('description')
   end
 end
