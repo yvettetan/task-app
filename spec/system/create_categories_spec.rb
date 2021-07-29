@@ -14,6 +14,11 @@ RSpec.describe 'Creating Categories', driver: :selenium_chrome, js: true do
     expect(page).to have_content('description')
     # expect the page to have a successful creation message
     expect(page).to have_text('Category was successfully created')
+    # ensure category is saved to database
+    category = Category.order('id').last
+    expect(category.title).to eq('title')
+    expect(category.description).to eq('description')
+    sleep(10)
   end
 
   it 'is invalid without a title' do
