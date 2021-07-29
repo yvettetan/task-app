@@ -12,19 +12,21 @@ RSpec.describe 'Creating Categories', driver: :selenium_chrome, js: true do
     # expect the page to have the content we submitted
     expect(page).to have_content('title')
     expect(page).to have_content('description')
+    # expect the page to have a successful creation message
+    expect(page).to have_text('Category was successfully created')
   end
 
   it 'is invalid without a title' do
     visit '/categories/new'
     fill_in 'Title', with: ''
     click_on 'Create Category'
-    expect(page).to have_content("Title can't be blank")
+    expect(page).to have_text("Title can't be blank")
   end
 
   it 'is invalid without a description' do
     visit '/categories/new'
     fill_in 'Description', with: ''
     click_on 'Create Category'
-    expect(page).to have_content("Description can't be blank")
+    expect(page).to have_text("Description can't be blank")
   end
 end

@@ -13,5 +13,6 @@ RSpec.describe 'Updating Categories', type: :system, driver: :selenium_chrome, j
     # expect the page to have the content we submitted
     expect(page).to have_content('title')
     expect(page).to have_content('description')
+    expect(page).to have_text('Category was successfully updated')
   end
 end
