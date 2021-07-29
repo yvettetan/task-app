@@ -17,6 +17,7 @@
         <td><%= category.title %></td>
         <td><%= category.description %></td>
         <td><%= link_to 'Show', category %></td>
+        <td><%= link_to 'Edit', edit_category_path(category) %></td>
       </tr>
     <% end %>
   </tbody>
