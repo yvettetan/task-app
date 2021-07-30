@@ -37,6 +37,7 @@ RSpec.describe 'Creating Categories', driver: :selenium_chrome, js: true do
     it 'is invalid without a title' do
       visit '/categories/new'
       fill_in 'Title', with: ''
+      fill_in 'Description', with: 'description'
       click_on 'Create Category'
       expect(page).to have_text("Title can't be blank")
       sleep(3)
@@ -44,6 +45,7 @@ RSpec.describe 'Creating Categories', driver: :selenium_chrome, js: true do
 
     it 'is invalid without a description' do
       visit '/categories/new'
+      fill_in 'Title', with: 'Title'
       fill_in 'Description', with: ''
       click_on 'Create Category'
       expect(page).to have_text("Description can't be blank")
