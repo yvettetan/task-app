@@ -1,37 +1,53 @@
 require 'rails_helper'
 
 RSpec.describe 'Creating Categories', driver: :selenium_chrome, js: true do
-  it 'creates and displays a category' do
-    # visit new category route
-    visit '/categories/new'
-    # fill in the form with needed information
-    fill_in 'Title', with: 'title'
-    fill_in 'Description', with: 'description'
-    # click a submit button
-    click_on 'Create Category'
-    # expect the page to have the content we submitted
-    expect(page).to have_content('title')
-    expect(page).to have_content('description')
-    # expect the page to have a successful creation message
-    expect(page).to have_text('Category was successfully created')
-    # ensure category is saved to database
-    category = Category.order('id').last
-    expect(category.title).to eq('title')
-    expect(category.description).to eq('description')
-    sleep(10)
+  describe 'Viewing all Categories' do
+    it 'shows all categories in index page' do
+      visit categories_path
+      within 'body' do
+        expect(page).to have_content('Categories')
+        expect(page).to have_link('New Category')
+        sleep(2)
+      end
+    end
   end
 
-  it 'is invalid without a title' do
-    visit '/categories/new'
-    fill_in 'Title', with: ''
-    click_on 'Create Category'
-    expect(page).to have_text("Title can't be blank")
+  describe 'Creating a valid Category' do
+    it 'successfully creates a new category' do
+      visit categories_path
+      click_on 'New Category'
+      expect(page).to have_current_path new_category_path
+      within 'form' do
+        fill_in 'Title', with: 'title'
+        fill_in 'Description', with: 'description'
+        click_on 'Create Category'
+        sleep(3)
+      end
+      expect(page).to have_content('title')
+      expect(page).to have_content('description')
+      expect(page).to have_text('Category was successfully created')
+      sleep(3)
+      category = Category.order('id').last
+      expect(category.title).to eq('title')
+      expect(category.description).to eq('description')
+    end
   end
 
-  it 'is invalid without a description' do
-    visit '/categories/new'
-    fill_in 'Description', with: ''
-    click_on 'Create Category'
-    expect(page).to have_text("Description can't be blank")
+  describe 'Creating an invalid Category' do
+    it 'is invalid without a title' do
+      visit '/categories/new'
+      fill_in 'Title', with: ''
+      click_on 'Create Category'
+      expect(page).to have_text("Title can't be blank")
+      sleep(3)
+    end
+
+    it 'is invalid without a description' do
+      visit '/categories/new'
+      fill_in 'Description', with: ''
+      click_on 'Create Category'
+      expect(page).to have_text("Description can't be blank")
+      sleep(3)
+    end
   end
 end
