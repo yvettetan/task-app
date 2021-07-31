@@ -41,6 +41,15 @@ class CategoriesController < ApplicationController
     end
   end
 
+  def destroy
+    @category = Category.find(params[:id])
+    @category.destroy
+    respond_to do |format|
+      format.html { redirect_to root_path, notice: 'Category was successfully deleted.' }
+      format.json { head :no_content }
+    end
+  end
+
   def category_params
     params.require(:category).permit(:title, :description)
   end
