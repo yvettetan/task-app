@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Creating Categories', driver: :selenium_chrome, js: true do
+RSpec.describe 'Creating Categories', type: :system, driver: :selenium_chrome, js: true do
   before :each do
     @category = Category.create!(title: 'Title', description: 'description')
   end
@@ -17,7 +17,7 @@ RSpec.describe 'Creating Categories', driver: :selenium_chrome, js: true do
   describe 'Creating a valid Task' do
     it 'successfully creates a new task with name and description' do
       visit category_path(id: @category.id)
-      click_on 'New Category'
+      click_on 'New Task'
       within 'form' do
         fill_in 'Name', with: 'Name'
         fill_in 'Description', with: 'Description'
@@ -32,7 +32,7 @@ RSpec.describe 'Creating Categories', driver: :selenium_chrome, js: true do
       expect(category.description).to eq('Description')
     end
     it 'is valid without a description' do
-      visit "categories/#{@category.id}/tasks/new"
+      visit new_category_task_path(@category.id)
       within 'form' do
         fill_in 'Name', with: 'Name'
         fill_in 'Description', with: ''
@@ -44,7 +44,7 @@ RSpec.describe 'Creating Categories', driver: :selenium_chrome, js: true do
 
   describe 'Creating an invalid Task' do
     it 'is invalid without a name' do
-      visit "categories/#{@category.id}/tasks/new"
+      visit new_category_task_path(@category.id)
       within 'form' do
         fill_in 'Name', with: ''
         fill_in 'Description', with: 'Description'
