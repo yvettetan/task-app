@@ -1,6 +1,8 @@
 <h1><%= @category.title %><h1>
 <p><%= @category.description %></p>
 
+<%= link_to 'New Task', new_category_task_path(@category.id) %>
+
 <%= link_to 'Edit', edit_category_path %> |
 <%= link_to 'Delete', category_path(@category.id),
                       method: :delete,
