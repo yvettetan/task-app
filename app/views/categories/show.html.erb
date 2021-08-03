@@ -1,10 +1,28 @@
-<h1><%= @category.title %><h1>
+<h1><%= @category.title %></h1>
 <p><%= @category.description %></p>
-
-<%= link_to 'New Task', new_category_task_path(@category.id) %>
-
 <%= link_to 'Edit', edit_category_path %> |
 <%= link_to 'Delete', category_path(@category.id),
                       method: :delete,
                       data: { confirm: "Are you sure you want to delete #{@category.title}?" } %> |
 <%= link_to 'Back', categories_path %>
+<hr>
+<h1>New task</h1>
+<%= render 'tasks/form' %>
+<hr>
+<h1>Tasks</h1>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th></th>
+  </tr>
+  <% @category.tasks.each do |task| %>
+    <% if task.persisted? %> <%# to only display tasks saved in the database %>
+      <tr>
+        <td><%= task.name %></td>
+        <td><%= task.description %></td>
+        <td><%= link_to 'Show', [task.category, task] %></td>
+      </tr>
+    <% end %>
+  <% end %>
+</table>
