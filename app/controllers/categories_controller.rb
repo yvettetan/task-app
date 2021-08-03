@@ -22,7 +22,9 @@ class CategoriesController < ApplicationController
     end
   end
 
-  def show; end
+  def show
+    @task = @category.tasks.build
+  end
 
   def edit; end
 
