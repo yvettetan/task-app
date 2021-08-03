@@ -1,0 +1,10 @@
+<p>
+  <b>Name:</b>
+  <%= @task.name %>
+</p>
+<p>
+  <b>Description:</b>
+  <%= @task.description %>
+</p>
+<%= link_to 'Edit', edit_category_task_path(@task.category, @task) %> |
+<%= link_to 'Back', category_path(@category.id) %>
