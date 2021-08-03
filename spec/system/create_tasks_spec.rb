@@ -4,53 +4,36 @@ RSpec.describe 'Creating Categories', type: :system, driver: :selenium_chrome, j
   before :each do
     @category = Category.create!(title: 'Title', description: 'description')
   end
-  describe 'Viewing all Tasks' do
-    it 'shows all tasks under a category' do
-      visit category_path(@category.id)
-      within 'body' do
-        expect(page).to have_content(@category.title)
-        expect(page).to have_content(@category.description)
-        expect(page).to have_link('New Task')
-      end
-    end
-  end
   describe 'Creating a valid Task' do
     it 'successfully creates a new task with name and description' do
-      visit category_path(id: @category.id)
-      click_on 'New Task'
-      within 'form' do
-        fill_in 'Name', with: 'Name'
-        fill_in 'Description', with: 'Description'
-        click_on 'Create Task'
-      end
+      visit category_path(@category.id)
+      click_on 'Create Task'
+      fill_in 'Name', with: 'Name'
+      fill_in 'Description', with: 'Description'
+      click_on 'Create Task'
       expect(page).to have_current_path category_path(@category.id)
       expect(page).to have_content('Name')
       expect(page).to have_content('Description')
-      expect(page).to have_text('Task was successfully created')
       task = Task.order('id').last
-      expect(task.title).to eq('Name')
-      expect(category.description).to eq('Description')
-    end
-    it 'is valid without a description' do
-      visit new_category_task_path(@category.id)
-      within 'form' do
-        fill_in 'Name', with: 'Name'
-        fill_in 'Description', with: ''
-        click_on 'Create Task'
-      end
-      expect(page).to have_text('Task was successfully created')
+      expect(task.name).to eq('Name')
+      expect(task.description).to eq('Description')
     end
   end
 
   describe 'Creating an invalid Task' do
     it 'is invalid without a name' do
       visit new_category_task_path(@category.id)
-      within 'form' do
-        fill_in 'Name', with: ''
-        fill_in 'Description', with: 'Description'
-        click_on 'Create Task'
-      end
+      fill_in 'Name', with: ''
+      fill_in 'Description', with: 'Description'
+      click_on 'Create Task'
       expect(page).to have_text("Name can't be blank")
+    end
+    it 'is invalid without a description' do
+      visit new_category_task_path(@category.id)
+      fill_in 'Name', with: 'Name'
+      fill_in 'Description', with: ''
+      click_on 'Create Task'
+      expect(page).to have_text("Description can't be blank")
     end
   end
 end
