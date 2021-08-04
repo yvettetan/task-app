@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
   before_action :set_category
-  before_action :set_task, only: %i[show edit update]
+  before_action :set_task, only: %i[show edit update destroy]
   def index
     @tasks = @category.tasks
   end
@@ -24,10 +24,15 @@ class TasksController < ApplicationController
 
   def update
     if @task.update(task_params)
-      redirect_to(@task.category)
+      redirect_to @task.category
     else
       render action: 'edit'
     end
+  end
+
+  def destroy
+    @task.destroy
+    redirect_to @task.category, notice: 'Task was successfully deleted.'
   end
 
   private
