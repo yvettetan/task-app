@@ -8,12 +8,11 @@ RSpec.describe 'Deleting Tasks', type: :system, driver: :selenium_chrome, js: tr
                                   category_id: category.id)
       category.save
       visit category_task_path(category, task)
-      expect(page).to have_link 'Delete'
-      visit category_path(id: category.id)
       click_on 'Delete'
-      expect(page.driver.browser.switch_to.alert.text).to eq "Are you sure you want to delete #{task.name}?"
-      expect(page.driver.browser.switch_to.alert.accept).to change(category.tasks, :count).by(-1)
-      expect { task.reload }.to raise_error ActiveRecord::RecordNotFound
+      expect(page.driver.browser.switch_to.alert.text).to eq("Are you sure you want to delete #{task.name}?")
+      page.driver.browser.switch_to.alert.accept
+      expect(page).to have_current_path category_path(category.id)
+      expect(page).to have_content('Task was successfully deleted')
     end
   end
 end
