@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
   before_action :set_category
-  before_action :set_task, only: %i[show]
+  before_action :set_task, only: %i[show edit update]
   def index
     @tasks = @category.tasks
   end
@@ -20,6 +20,16 @@ class TasksController < ApplicationController
 
   def show; end
 
+  def edit; end
+
+  def update
+    if @task.update(task_params)
+      redirect_to(@task.category)
+    else
+      render action: 'edit'
+    end
+  end
+
   private
 
   def set_category
@@ -31,6 +41,6 @@ class TasksController < ApplicationController
   end
 
   def task_params
-    params.require(:task).permit(:name, :description)
+    params.require(:task).permit(:name, :description, :due_at)
   end
 end

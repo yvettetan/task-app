@@ -14,14 +14,15 @@
   <tr>
     <th>Name</th>
     <th>Description</th>
+    <th>Due Date</th>
     <th></th>
   </tr>
   <% @category.tasks.each do |task| %>
     <% if task.persisted? %> <%# to only display tasks saved in the database %>
       <tr>
-        <td><%= task.name %></td>
+        <td><%= link_to "#{task.name}", [task.category, task] %></td>
         <td><%= task.description %></td>
-        <td><%= link_to 'Show', [task.category, task] %></td>
+        <td><%= task.due_at.strftime("%b %d, %Y") %></td>
       </tr>
     <% end %>
   <% end %>

@@ -3,6 +3,7 @@
   <tr>
     <th>Name</th>
     <th>Description</th>
+    <th>Due Date</th>
     <th></th>
     <th></th>
     <th></th>
@@ -11,6 +12,7 @@
     <tr>
       <td><%= task.name %></td>
       <td><%= task.description %></td>
+      <td><%= task.due_at %></td>
       <td><%= link_to 'Show', [task.category, task] %></td>
       <td><%= link_to 'Edit', edit_category_task_path(task.category, task) %></td>
       <td><%= link_to 'Destroy', [task.category, task], method: :delete, data: { confirm: 'Are you sure?' } %></td>
