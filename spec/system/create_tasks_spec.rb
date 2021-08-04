@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Creating Categories', type: :system, driver: :selenium_chrome, js: true do
+RSpec.describe 'Creating Tasks', type: :system, driver: :selenium_chrome, js: true do
   before :each do
     @category = Category.create!(title: 'Title', description: 'description')
   end
