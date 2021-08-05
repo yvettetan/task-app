@@ -6,19 +6,20 @@
     <th>Due Date</th>
     <th></th>
     <th></th>
-    <th></th>
   </tr>
   <% @tasks.each do |task| %>
-    <tr>
-      <td><%= task.name %></td>
-      <td><%= task.description %></td>
-      <td><%= task.due_at %></td>
-      <td><%= link_to 'Show', [task.category, task] %></td>
-      <td><%= link_to 'Edit', edit_category_task_path(task.category, task) %></td>
-      <td><%= link_to 'Destroy', [task.category, task], method: :delete, data: { confirm: 'Are you sure?' } %></td>
-    </tr>
+    <% if task.user == current_user %>
+      <tr>
+        <td><%= task.name %></td>
+        <td><%= task.description %></td>
+        <td><%= task.due_at %></td>
+        <td><%= link_to "Show", [task.category, task] %></td>
+        <td><%= link_to "Edit", edit_category_task_path(task.category, task) %></td>
+        <td><%= link_to "Destroy", [task.category, task], method: :delete, data: { confirm: "Are you sure?" } %></td>
+      </tr>
+    <% end %>
   <% end %>
 </table>
 <br />
-<%= link_to 'New Task', new_category_task_path(params[:category_id]) %>
-<%= link_to 'Back', category_path(@category.id) %>
+<% #= link_to 'New Task', new_category_task_path(params[:category_id]) %>
+<% #= link_to 'Back', category_path(@category.id) %>

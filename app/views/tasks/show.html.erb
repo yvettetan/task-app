@@ -10,8 +10,8 @@
   <b>Due Date:</b>
   <%= @task.due_at.strftime("%b %d, %Y") %>
 </p>
-<%= link_to 'Edit', edit_category_task_path(@task.category, @task) %> |
-<%= link_to 'Delete', category_task_path(@task.category, @task), 
-                      method: :delete,
-                      data: { confirm: "Are you sure you want to delete #{@task.name}?" } %>
-<%= link_to 'Back', category_path(@category.id) %>
+<%= link_to "Edit", edit_category_task_path(@task.category, @task) %> |
+<%= link_to "Delete", category_task_path(@task.category, @task),
+            method: :delete,
+            data: { confirm: "Are you sure you want to delete #{@task.name}?" } %>
+<%= link_to "Back", category_path(@category.id) %>
