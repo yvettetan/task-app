@@ -1,3 +1,46 @@
+<div class="col-lg-6">
+  <h2>TODAY<span class="lead"> <%= Date.today.strftime("%a, %B %d") %></span></h2>
+  <% @tasks.each do |task| %>
+    <% if task.due_at.strftime("%b %d") == DateTime.now.strftime("%b %d") %>
+      <div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <div class="card-title d-flex flex-wrap justify-content-between">
+            <div class="d-flex align-items-center">
+              <h3 class="card-title"><%= task.name %></h3>
+              <span class="badge bg-secondary"> <%= task.category.title %></span>
+            </div>
+            <div>
+              <%= link_to 'Edit', edit_category_task_path(task.category, task), class: "btn btn-secondary" %>
+              <%= link_to 'Delete', [task.category, task], class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
+            </div>
+          </div>
+          <p> <%= task.description %></p>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+<hr>
+<div class="col-lg-6">
+  <% @tasks.each do |task| %>
+    <% if task.due_at.strftime("%b %d") != DateTime.now.strftime("%b %d") %>
+      <div class="card">
+        <div class="card-body">
+          <div class="card-title d-flex justify-content-between">
+            <h3 class="card-title"><%= task.name %> <span><%= task.due_at.strftime("%b %d") %></span> </h3>
+            <div>
+              <%= link_to 'Edit', edit_category_task_path(task.category, task), class: "btn btn-secondary" %>
+              <%= link_to 'Delete', [task.category, task], class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
+            </div>
+          </div>
+          <p> <%= task.description %></p>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>
 <h1>Tasks</h1>
 <table>
   <tr>
@@ -12,7 +55,7 @@
     <tr>
       <td><%= task.name %></td>
       <td><%= task.description %></td>
-      <td><%= task.due_at %></td>
+      <td><%= task.due_at.strftime("%b %d") %></td>
       <td><%= link_to 'Show', [task.category, task] %></td>
       <td><%= link_to 'Edit', edit_category_task_path(task.category, task) %></td>
       <td><%= link_to 'Destroy', [task.category, task], method: :delete, data: { confirm: 'Are you sure?' } %></td>
