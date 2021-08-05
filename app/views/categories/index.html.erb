@@ -11,18 +11,20 @@
 
   <tbody>
     <% @categories.each do |category| %>
-      <tr>
-        <td><%= link_to "#{category.title}", category %></td>
-        <td><%= category.description %></td>
-        <td><%= link_to 'Edit', edit_category_path(category) %></td>
-        <td><%= link_to 'Delete', category_path(category.id),
-                      method: :delete,
-                      data: { confirm: "Are you sure you want to delete #{category.title}?" } %></td>
-      </tr>
+      <% if category.user == current_user %>
+        <tr>
+          <td><%= link_to "#{category.title}", category %></td>
+          <td><%= category.description %></td>
+          <td><%= link_to "Edit", edit_category_path(category) %></td>
+          <td><%= link_to "Delete", category_path(category.id),
+                          method: :delete,
+                          data: { confirm: "Are you sure you want to delete #{category.title}?" } %></td>
+        </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>
 
 <br>
 
-<%= link_to 'New Category', new_category_path %>
+<%= link_to "New Category", new_category_path %>

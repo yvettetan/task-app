@@ -1,6 +1,9 @@
 class TasksController < ApplicationController
   before_action :set_category, except: %i[index]
   before_action :set_task, only: %i[show edit update destroy]
+  before_action :authenticate_user!
+  before_action :correct_user, only: [:show, :edit, :update, :destroy]
+
   def index
     @tasks = Task.all
   end
@@ -26,13 +29,18 @@ class TasksController < ApplicationController
     if @task.update(task_params)
       redirect_to @task.category
     else
-      render action: 'edit'
+      render action: "edit"
     end
   end
 
   def destroy
     @task.destroy
-    redirect_to @task.category, notice: 'Task was successfully deleted.'
+    redirect_to @task.category, notice: "Task was successfully deleted."
+  end
+
+  def correct_user
+    @task = current_user.tasks.find_by(id: params[:id])
+    redirect_to tasks_path, notice: "404 not found" if @task.nil?
   end
 
   private
@@ -46,6 +54,6 @@ class TasksController < ApplicationController
   end
 
   def task_params
-    params.require(:task).permit(:name, :description, :due_at)
+    params.require(:task).permit(:name, :description, :due_at, :user_id)
   end
 end
