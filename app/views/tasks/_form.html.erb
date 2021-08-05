@@ -18,13 +18,18 @@
   </div>
   <div class="field">
     <%= f.label :due_at %><br />
-    <%= f.datetime_field :due_at, placeholder: 'Pick a Date', data: {
-      controller: "flatpickr",
-      flatpickr_alt_format: t("date.formats.long"),
-      flatpickr_date_format: "%b %d, %Y",
-      flatpickr_min_date: Time.zone.now
-    } %>
+    <%= f.datetime_field :due_at, placeholder: "Pick a Date", data: {
+                                    controller: "flatpickr",
+                                    flatpickr_alt_format: t("date.formats.long"),
+                                    flatpickr_date_format: "%b %d, %Y",
+                                    flatpickr_min_date: Time.zone.now,
+                                  } %>
   </div>
+
+  <div class="field">
+    <%= f.number_field :user_id, id: :task_user_id, value: current_user.id, type: :hidden %>
+  </div>
+  
   <div class="actions">
     <%= f.submit %>
   </div>
