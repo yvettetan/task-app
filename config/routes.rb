@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   devise_for :users
-  root 'categories#index'
+  root 'tasks#index'
   resources :categories do
-    resources :tasks
+    resources :tasks, except: :index
   end
+  resources :tasks, only: :index
 end
