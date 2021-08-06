@@ -3,9 +3,11 @@ require 'rails_helper'
 RSpec.describe 'Updating Tasks', type: :system, driver: :selenium_chrome, js: true do
   describe 'Updating a task' do
     it 'successfully updates a task' do
-      category = Category.new(title: 'Home', description: 'list of tasks at home')
+      user = FactoryBot.create(:user)
+      login_as(user)
+      category = Category.new(title: 'Home', description: 'list of tasks at home', user_id: user.id)
       task = category.tasks.build(name: 'Laundry', description: 'sort, wash and dry clothes', due_at: Date.today.to_s,
-                                  category_id: category.id)
+                                  category_id: category.id, user_id: user.id)
       category.save
       visit category_task_path(category, task)
       click_on 'Edit'
