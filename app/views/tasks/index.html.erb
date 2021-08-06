@@ -21,7 +21,7 @@
     <% end %>
   <% end %>
 </table>
-<div>
+<div id="today">
   <h2 class="text-primary">TODAY<span class="lead"> <%= Date.today.strftime("%a, %B %d") %></span></h2>
   <% @tasks.order(due_at: :asc).each do |task| %>
     <% if task.user == current_user %>
