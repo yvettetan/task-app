@@ -1,1 +1,33 @@
 @import "~bootstrap/scss/bootstrap"; 
+@import "./typography";
+@import "./variables";
+
+
+body {
+    background: $body-color;
+    font-family: $primary-font;
+}
+a,
+a:hover,
+a:focus {
+  text-decoration: none;
+}
+
+a, button, select {
+    cursor: pointer;
+}
+.bg-primary {
+    background: $primary-color !important;
+}
+.text-primary {
+    color: $primary-color !important;
+}
+.text-dark {
+    color: $text-color-dark !important;
+}
+.text-warning {
+    color: $warning-color !important;
+}
+p {
+    font-family: $secondary-font;
+}
