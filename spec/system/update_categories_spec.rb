@@ -3,10 +3,13 @@ require 'rails_helper'
 RSpec.describe 'Updating Categories', type: :system, driver: :selenium_chrome, js: true do
   describe 'Updating a category' do
     it 'successfully updates a category' do
-      category = Category.create!(title: 'Home', description: 'daily tasks at home')
+      user = FactoryBot.create(:user)
+      login_as(user)
       visit categories_path
+      category = Category.create!(title: 'Home', description: 'daily tasks at home', user_id: user.id)
       expect(page).to have_link 'Edit'
-      visit category_path(id: category.id)
+      sleep(2)
+      visit category_path(category.id)
       click_on 'Edit'
       within 'form' do
         fill_in 'Title', with: 'School Assignments'
