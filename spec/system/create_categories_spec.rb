@@ -1,6 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe 'Creating Categories', driver: :selenium_chrome, js: true do
+  before(:each) do
+    login_as(FactoryBot.create(:user))
+  end
   describe 'Viewing all Categories' do
     it 'shows all categories in index page' do
       visit categories_path
