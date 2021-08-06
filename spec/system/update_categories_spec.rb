@@ -7,8 +7,6 @@ RSpec.describe 'Updating Categories', type: :system, driver: :selenium_chrome, j
       login_as(user)
       visit categories_path
       category = Category.create!(title: 'Home', description: 'daily tasks at home', user_id: user.id)
-      expect(page).to have_link 'Edit'
-      sleep(2)
       visit category_path(category.id)
       click_on 'Edit'
       within 'form' do
