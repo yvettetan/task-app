@@ -2,7 +2,9 @@ require 'rails_helper'
 
 RSpec.describe 'Creating Tasks', type: :system, driver: :selenium_chrome, js: true do
   before :each do
-    @category = Category.create!(title: 'Title', description: 'description')
+    user = FactoryBot.create(:user)
+    login_as(user)
+    @category = Category.create!(title: 'Title', description: 'description', user_id: user.id)
   end
   describe 'Creating a valid Task' do
     it 'successfully creates a new task with name, description and due date' do
