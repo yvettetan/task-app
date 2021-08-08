@@ -1,14 +1,14 @@
-<h2 class="text-danger">OVERDUE</h2>
-<table class="table">
-  <tr>
-    <th>Category</th>
-    <th>Name</th>
-    <th>Description</th>
-    <th>Due Date</th>
-    <th colspan="3">Actions</th>
-  </tr>
-  <% @tasks.order(due_at: :asc).each do |task| %>
-    <% if task.user == current_user && task.due_at.to_date < DateTime.current.to_date %>
+<div id="overdue">
+  <h2 class="text-danger">OVERDUE</h2>
+  <table class="table">
+    <tr>
+      <th>Category</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Due Date</th>
+      <th colspan="3">Actions</th>
+    </tr>
+    <% overdue(@tasks).each do |task| %>
       <tr>
         <td><span class="badge bg-success"><%= task.category.title %></span></td>
         <td><%= task.name %></td>
@@ -19,38 +19,31 @@
         <td><%= link_to "Delete", [task.category, task], method: :delete, data: { confirm: "Are you sure?" } %></td>
       </tr>
     <% end %>
-  <% end %>
-</table>
+  </table>
+</div>
 <div id="today">
   <h2 class="text-primary">TODAY<span class="lead"> <%= Date.today.strftime("%a, %B %d") %></span></h2>
-  <% @tasks.order(due_at: :asc).each do |task| %>
-    <% if task.user == current_user %>
-      <% if task.due_at.to_date == DateTime.current.to_date %>
-        <table class="table">
-          <tr>
-            <th>Category</th>
-            <th>Name</th>
-            <th>Description</th>
-            <th colspan="3">Actions</th>
-          </tr>
-          <% if task.user == current_user %>
-            <tr>
-              <td><span class="badge bg-success"><%= task.category.title %></span></td>
-              <td><%= task.name %></td>
-              <td><%= task.description %></td>
-              <td><%= link_to "Show", [task.category, task] %></td>
-              <td><%= link_to "Edit", edit_category_task_path(task.category, task) %></td>
-              <td><%= link_to "Delete", [task.category, task], method: :delete, data: { confirm: "Are you sure?" } %></td>
-            </tr>
-          <% end %>
-        </table>
-      <% end %>
+  <table class="table">
+    <tr>
+      <th>Category</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th colspan="3">Actions</th>
+    </tr>
+    <% today(@tasks).each do |task| %>
+      <tr>
+        <td><span class="badge bg-success"><%= task.category.title %></span></td>
+        <td><%= task.name %></td>
+        <td><%= task.description %></td>
+        <td><%= link_to "Show", [task.category, task] %></td>
+        <td><%= link_to "Edit", edit_category_task_path(task.category, task) %></td>
+        <td><%= link_to "Delete", [task.category, task], method: :delete, data: { confirm: "Are you sure?" } %></td>
+      </tr>
     <% end %>
-  <% end %>
+  </table>
 </div>
-<h2 class="text-warning">UPCOMING</h2>
-<br>
-<% if !@tasks.empty? %>
+<div id="upcoming">
+  <h2 class="text-warning">UPCOMING</h2>
   <table class="table">
     <tr>
       <th>Category</th>
@@ -59,20 +52,16 @@
       <th>Due Date</th>
       <th colspan="3">Actions</th>
     </tr>
-    <% @tasks.order(due_at: :asc).each do |task| %>
-      <% if task.user == current_user && task.due_at.to_date > DateTime.current.to_date%>
-        <tr>
-          <td><span class="badge bg-success"><%= task.category.title %></span></td>
-          <td><%= task.name %></td>
-          <td><%= task.description %></td>
-          <td><%= task.due_at.strftime("%b %d, %Y") %></td>
-          <td><%= link_to "Show", [task.category, task] %></td>
-          <td><%= link_to "Edit", edit_category_task_path(task.category, task) %></td>
-          <td><%= link_to "Delete", [task.category, task], method: :delete, data: { confirm: "Are you sure?" } %></td>
-        </tr>
-      <% end %>
+    <% upcoming(@tasks).each do |task| %>
+      <tr>
+        <td><span class="badge bg-success"><%= task.category.title %></span></td>
+        <td><%= task.name %></td>
+        <td><%= task.description %></td>
+        <td><%= format_date(task.due_at) %></td>
+        <td><%= link_to "Show", [task.category, task] %></td>
+        <td><%= link_to "Edit", edit_category_task_path(task.category, task) %></td>
+        <td><%= link_to "Delete", [task.category, task], method: :delete, data: { confirm: "Are you sure?" } %></td>
+      </tr>
     <% end %>
   </table>
-<% end %>
-<% #= link_to 'New Task', new_category_task_path(params[:category_id]) %>
-<% #= link_to 'Back', category_path(@category.id) %>
+</div>
