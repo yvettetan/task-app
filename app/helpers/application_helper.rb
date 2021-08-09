@@ -4,7 +4,7 @@ module ApplicationHelper
   end
 
   def today(tasks)
-    tasks.where(due_at: Date.today)
+    tasks.where(due_at: Date.today).order(due_at: :asc)
   end
 
   def overdue(tasks)
