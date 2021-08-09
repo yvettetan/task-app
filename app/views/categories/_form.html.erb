@@ -7,17 +7,17 @@
     </div>
   <% end %>
   <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title %>
+    <%= form.label :title, class: 'form-label' %>
+    <%= form.text_field :title, class: 'form-control' %>
   </div>
   <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description %>
+    <%= form.label :description, class: 'form-label' %>
+    <%= form.text_area :description, class: 'form-control' %>
   </div>
   <div class="field" >
     <%= form.hidden_field :user_id, id: :category_user_id, value: current_user.id %>
   </div>
-  <div class="actions">
-    <%= form.submit %>
+  <div class="actions mt-4">
+    <%= form.submit class: 'btn btn-secondary' %>
   </div>
 <% end %>
