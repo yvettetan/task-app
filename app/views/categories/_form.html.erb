@@ -2,26 +2,21 @@
   <% if category.errors.any? %>
     <div id="error_explanation">
       <% category.errors.each do |error| %>
-          <p><%= error.full_message %></p>
+        <p><%= error.full_message %></p>
       <% end %>
     </div>
   <% end %>
-
   <div class="field">
     <%= form.label :title %>
     <%= form.text_field :title %>
   </div>
-
   <div class="field">
     <%= form.label :description %>
     <%= form.text_area :description %>
   </div>
-
-  <div class="field">
-    <%= form.label :user_id %>
-    <%= form.number_field :user_id, id: :category_user_id, value: current_user.id, type: :visible %>
+  <div class="field" >
+    <%= form.hidden_field :user_id, id: :category_user_id, value: current_user.id %>
   </div>
-
   <div class="actions">
     <%= form.submit %>
   </div>

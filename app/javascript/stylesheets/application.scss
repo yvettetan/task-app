@@ -2,17 +2,18 @@
 @import "./typography";
 @import "./variables";
 
-
 body {
     background: $body-color;
     font-family: $primary-font;
 }
 a,
-a:hover,
 a:focus {
   text-decoration: none;
+  color: $text-color-dark;
+  &:hover {
+      color: $text-color-light;
+  }
 }
-
 a, button, select {
     cursor: pointer;
 }

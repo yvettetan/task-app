@@ -11,9 +11,10 @@
   </head>
   <body>
     <%= render 'layouts/header' %>
-    <div class="container">
-      <p id="notice" class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
+    <div class="container mt-4">
+      <% if notice %>
+        <%= render 'layouts/notices' %>
+      <% end %>
       <%= yield %>
     </div>
   </body>
