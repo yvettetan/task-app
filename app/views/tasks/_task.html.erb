@@ -1,0 +1,16 @@
+<div class="card mt-2">
+  <div class="px-4 py-2">
+    <span><%= format_date(task.due_at) if task.due_at != Date.today %></span>
+    <div class="d-flex flex-wrap justify-content-between align-items-center">
+      <div>
+        <h2 class="d-inline"><%= link_to "#{task.name}", [task.category, task] %></h2>
+        <p class="d-inline"><%= task.description %></p>
+      </div>
+      <div>
+        <%= link_to "Edit", edit_category_task_path(task.category, task), class: 'btn btn-warning' %>
+        <%= link_to "Delete", [task.category, task], class: 'btn btn-danger', method: :delete, data: { confirm: "Are you sure?" } %>
+      </div>
+    </div>
+    <span class="badge bg-success"><%= link_to "#{task.category.title}", category_path(task.category.id), class:'text-white'   %></span>
+  </div>
+</div>
