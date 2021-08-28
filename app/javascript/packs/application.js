@@ -10,6 +10,7 @@ import "channels"
 import 'bootstrap/dist/js/bootstrap'
 import 'bootstrap/scss/bootstrap'
 import '../controllers'
+import "@fortawesome/fontawesome-free/css/all"
 require("../stylesheets/application.scss")
 
 Rails.start()
