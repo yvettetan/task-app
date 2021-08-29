@@ -11,14 +11,12 @@
   </head>
   <body>
     <%= render 'layouts/header' %>
-    <div class="container mt-4">
-      <% if notice %>
-        <%= render 'layouts/notices' %>
-      <% end %>
-      <% if alert %>
-        <p class="alert"><%= alert %></p>
-      <% end %>
-      <%= yield %>
-    </div>
+    <% if notice %>
+      <%= render 'layouts/notices' %>
+    <% end %>
+    <% if alert %>
+      <p class="alert text-alert"><%= alert %></p>
+    <% end %>
+    <%= yield %>
   </body>
 </html>
