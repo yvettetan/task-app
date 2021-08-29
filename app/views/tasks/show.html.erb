@@ -1,17 +1,27 @@
-<p>
-  <b>Name:</b>
-  <%= @task.name %>
-</p>
-<p>
-  <b>Description:</b>
-  <%= @task.description %>
-</p>
-<p>
-  <b>Due Date:</b>
-  <%= @task.due_at.strftime("%b %d, %Y") %>
-</p>
-<%= link_to "Edit", edit_category_task_path(@task.category, @task) %> |
-<%= link_to "Delete", category_task_path(@task.category, @task),
+<section class='main-section'>
+  <div class="card col-md-7 col-lg-5 mx-auto">
+    <div class="card-header">
+      <%= @task.category.title %> Task
+    </div>
+    <div class="card-body">
+      <div class='d-flex justify-content-between'>
+        <h5 class="card-title"><%= @task.name %></h5>
+        <div>
+          <%= link_to "", edit_category_task_path(@task.category, @task), class:'far fa-edit text-warning' %> |
+          <%= link_to "", category_task_path(@task.category, @task),
+            class: 'far fa-trash-alt text-danger',
             method: :delete,
             data: { confirm: "Are you sure you want to delete #{@task.name}?" } %>
-<%= link_to "Back", category_path(@category.id) %>
+        </div>
+      </div>
+      <p class="card-text text-muted"><%= @task.description %></p>
+      <div class='d-flex'>
+        Due Date: 
+        <p class='text-danger mx-2'>
+          <%= @task.due_at.strftime("%b %d, %Y") %>
+        </p>
+      </div>
+      <%= link_to "View all #{@task.category.title} tasks", category_path(@category.id), class: 'link-primary float-end' %>
+    </div>
+  </div>
+</section>

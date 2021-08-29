@@ -1,36 +1,45 @@
-<%= form_with(model: [@task.category, @task]) do |f| %>
-  <% if @task.errors.any? %>
-    <div id="error_explanation">
-      <ul>
-        <% @task.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
+<div class="container-fluid row justify-content-center">
+  <div class="col-md-7 col-lg-5 bg-light shadow">
+    <div class="p-4 p-md-5">
+      <h3 class="text-center mb-4"> <%= action_name.to_s.humanize %> Task</h3>
+      <p>Category: <%= @task.category.title %></p>
+      <%= form_with(model: [@task.category, @task]) do |f| %>
+        <% if @task.errors.any? %>
+          <div id="error_explanation">
+            <ul>
+              <% @task.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+              <% end %>
+            </ul>
+          </div>
         <% end %>
-      </ul>
-    </div>
-  <% end %>
-  <div class="d-flex">
-    <div class="field">
-      <%= f.label :name %><br />
-      <%= f.text_field :name, class: 'form-control' %>
-    </div>
-    <div class="field mx-2">
-      <%= f.label :due_at %><br />
-      <%= f.datetime_field :due_at, class: 'form-control', placeholder: "Pick a Date", data: {
+        <div class="d-flex">
+          <div class="field">
+            <%= f.label :name %><br />
+            <%= f.text_field :name, class: 'form-control' %>
+          </div>
+          <div class="field mx-2">
+            <%= f.label :due_at %><br />
+            <%= f.datetime_field :due_at, class: 'form-control', placeholder: "Pick a Date", data: {
                                     controller: "flatpickr",
                                     flatpickr_alt_format: t("date.formats.long"),
                                     flatpickr_date_format: "%b %d, %Y",
                                     flatpickr_min_date: Time.zone.now,
                                   } %>
+          </div>
+        </div>
+        <div class="field">
+          <%= f.label :description %><br />
+          <%= f.text_area :description, class: 'form-control' %>
+        </div>
+        <div class="field">
+          <%= f.number_field :user_id, id: :task_user_id, value: current_user.id, type: :hidden %>
+        </div>
+        <div class="actions mt-4">
+          <%= f.submit class: 'btn btn-secondary float-end' %>
+        </div>
+      <% end %>
     </div>
   </div>
-  <div class="field">
-    <%= f.label :description %><br />
-    <%= f.text_area :description, class: 'form-control' %>
-  </div>
-  <div class="field">
-    <%= f.number_field :user_id, id: :task_user_id, value: current_user.id, type: :hidden %>
-  </div>
-  <div class="actions mt-4">
-    <%= f.submit class: 'btn btn-secondary' %>
-  </div>
-<% end %>
+</div>
+</div>

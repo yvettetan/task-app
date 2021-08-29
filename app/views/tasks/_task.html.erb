@@ -1,16 +1,22 @@
-<div class="card mt-2">
-  <div class="px-4 py-2">
-    <span><%= format_date(task.due_at) if task.due_at != Date.today %></span>
-    <div class="d-flex flex-wrap justify-content-between align-items-center">
-      <div>
-        <h2 class="d-inline"><%= link_to "#{task.name}", [task.category, task] %></h2>
-        <p class="d-inline"><%= task.description %></p>
-      </div>
-      <div>
-        <%= link_to "Edit", edit_category_task_path(task.category, task), class: 'btn btn-warning' %>
-        <%= link_to "Delete", [task.category, task], class: 'btn btn-danger', method: :delete, data: { confirm: "Are you sure?" } %>
-      </div>
-    </div>
-    <span class="badge bg-success"><%= link_to "#{task.category.title}", category_path(task.category.id), class:'text-white'   %></span>
+<% if task.persisted? %>
+  <div class="list-group my-2">
+    <label class="list-group-item d-flex">
+      <span class="p-0 container-fluid">
+        <div class='d-flex justify-content-between'>
+          <div>
+            <%= format_date(task.due_at) if task.due_at != Date.today %>
+            <span class="badge bg-success"><%= link_to "#{task.category.title}", category_path(task.category.id), class:'text-white'   %></span>
+          </div>
+          <div>
+            <%= link_to '', edit_category_task_path(task.category, task), class: 'text-warning far fa-edit' %> |
+            <%= link_to '', [task.category, task], class: 'text-danger far fa-trash-alt', method: :delete, data: { confirm: "Are you sure you want to delete #{task.name}?" } %>
+          </div>
+        </div>
+        <strong><%= link_to "#{task.name}", [task.category, task] %></strong>
+        <small class="d-block text-muted">
+          <%= truncate(task.description, length: 80) %>
+        </small>
+      </span>
+    </label>
   </div>
-</div>
+<% end %>

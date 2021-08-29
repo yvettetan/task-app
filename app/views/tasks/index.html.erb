@@ -1,22 +1,29 @@
-<div id="overdue">
-  <% if !overdue(@tasks).empty? %>
-    <h2 class="text-danger">OVERDUE</h2>
-    <% overdue(@tasks).each do |task| %>
-      <%= render 'task', task: task %>
-    <% end %>
-  <% end %>
-</div>
-<div id="today" class="my-4">
-  <h2 class="text-primary">TODAY<span class="lead"> <%= Date.today.strftime("%a, %B %d") %></span></h2>
-  <%= 'You have no tasks for today' unless !today(@tasks).empty? %>
-  <% today(@tasks).each do |task| %>
-    <%= render 'task', task: task %>
-  <% end %>
-</div>
-<div id="upcoming">
-  <h2 class="text-warning">UPCOMING</h2>
-  <%= 'You have no upcoming tasks' unless !upcoming(@tasks).empty? %>
-  <% upcoming(@tasks).each do |task| %>
-    <%= render 'task', task: task %>
-  <% end %>
-</div>
+<section class='main-section'>
+  <div class="container-fluid">
+    <div class="row">
+      <% if !overdue(@tasks).empty? %>
+        <div id="overdue" class="col-md-6 col-lg-4">
+          <h2 class="fs-4 text-danger">OVERDUE</h2>
+          <% overdue(@tasks).each do |task| %>
+            <%= render 'task', task: task %>
+          <% end %>
+        </div>
+      <% end %>
+      <div id="today" class="col-md-6 col-lg-4">
+        <h2 class="fs-4 text-primary">TODAY<span class="lead fs-6"> <%= Date.today.strftime("%a, %B %d") %></span></h2>
+        <%= 'You have no tasks for today' unless !today(@tasks).empty? %>
+        <% today(@tasks).each do |task| %>
+          <%= render 'task', task: task %>
+        <% end %>
+      </div>
+      <% if !upcoming(@tasks).empty? %>
+        <div id="upcoming" class='col-md-6 col-lg-4'>
+          <h2 class="fs-4 text-warning">UPCOMING</h2>
+          <% upcoming(@tasks).each do |task| %>
+            <%= render 'task', task: task %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>
