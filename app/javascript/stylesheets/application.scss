@@ -5,6 +5,7 @@
 body {
     background: $body-color;
     font-family: $primary-font;
+    height: 100vh;
 }
 a,
 a:focus {
@@ -31,4 +32,32 @@ a, button, select {
 }
 p {
     font-family: $secondary-font;
+}
+.container-center {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.text-alert {
+    margin-top: 60px;
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    color: rgb(218, 96, 96);
+    z-index: 1;
+}
+.notices {
+    position: absolute;
+    width: 100%;
+    z-index: 1;
+}
+.main-section {
+    margin: 70px 20px 0 20px;
+}
+.back-btn {
+    position: absolute;
+    top: 4em;
+    left: 2em;
 }
