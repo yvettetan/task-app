@@ -1,23 +1,31 @@
-<%= form_with(model: category) do |form| %>
-  <% if category.errors.any? %>
-    <div id="error_explanation">
-      <% category.errors.each do |error| %>
-        <p><%= error.full_message %></p>
+<div class="container-fluid row justify-content-center">
+  <div class="col-md-7 col-lg-5 bg-light shadow">
+    <div class="p-4 p-md-5">
+      <h3 class="text-center mb-4"> <%= action_name.to_s.humanize %> Category</h3>
+      <%= form_with(model: category) do |form| %>
+        <% if category.errors.any? %>
+          <div id="error_explanation">
+            <% category.errors.each do |error| %>
+              <p><%= error.full_message %></p>
+            <% end %>
+          </div>
+        <% end %>
+        <div class="field">
+          <%= form.label :title, class: 'form-label' %>
+          <%= form.text_field :title, class: 'form-control' %>
+        </div>
+        <div class="field">
+          <%= form.label :description, class: 'form-label' %>
+          <%= form.text_area :description, class: 'form-control' %>
+        </div>
+        <div class="field" >
+          <%= form.hidden_field :user_id, id: :category_user_id, value: current_user.id %>
+        </div>
+        <div class="actions mt-4">
+          <%= form.submit class: 'btn btn-secondary' %>
+        </div>
       <% end %>
     </div>
-  <% end %>
-  <div class="field">
-    <%= form.label :title, class: 'form-label' %>
-    <%= form.text_field :title, class: 'form-control' %>
   </div>
-  <div class="field">
-    <%= form.label :description, class: 'form-label' %>
-    <%= form.text_area :description, class: 'form-control' %>
-  </div>
-  <div class="field" >
-    <%= form.hidden_field :user_id, id: :category_user_id, value: current_user.id %>
-  </div>
-  <div class="actions mt-4">
-    <%= form.submit class: 'btn btn-secondary' %>
-  </div>
-<% end %>
+</div>
+</div>
