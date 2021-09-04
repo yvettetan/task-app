@@ -30,6 +30,14 @@ a, button, select {
 .text-warning {
     color: $warning-color !important;
 }
+.btn-primary {
+    background-color: $primary-color !important;
+    border: none;
+}
+.btn-warning {
+    background-color: $warning-color !important;
+    border: none;
+}
 p {
     font-family: $secondary-font;
 }
