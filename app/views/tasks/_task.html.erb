@@ -1,11 +1,11 @@
 <% if task.persisted? %>
   <div class="list-group my-2">
-    <label class="list-group-item d-flex">
+    <label class="list-group-item d-flex shadow-sm">
       <span class="p-0 container-fluid">
         <div class='d-flex justify-content-between'>
           <div>
             <%= format_date(task.due_at) if task.due_at != Date.today %>
-            <span class="badge bg-success"><%= link_to "#{task.category.title}", category_path(task.category.id), class:'text-white'   %></span>
+            <span class="badge bg-primary"><%= link_to "#{task.category.title}", category_path(task.category.id), class:'text-white'   %></span>
           </div>
           <div>
             <%= link_to '', edit_category_task_path(task.category, task), class: 'text-warning far fa-edit' %> |
