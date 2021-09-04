@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/faker-ruby/faker.git
+  revision: 1da056158dad0e69e0472062c36ad242ea532ee5
+  branch: master
+  specs:
+    faker (2.19.0)
+      i18n (>= 1.6, < 2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -79,6 +87,12 @@ GEM
     childprocess (3.0.0)
     concurrent-ruby (1.1.9)
     crass (1.0.6)
+    database_cleaner (2.0.1)
+      database_cleaner-active_record (~> 2.0.0)
+    database_cleaner-active_record (2.0.1)
+      activerecord (>= 5.a)
+      database_cleaner-core (~> 2.0.0)
+    database_cleaner-core (2.0.1)
     devise (4.8.0)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -92,8 +106,6 @@ GEM
     factory_bot_rails (6.2.0)
       factory_bot (~> 6.2.0)
       railties (>= 5.0.0)
-    faker (2.18.0)
-      i18n (>= 1.6, < 2)
     ffi (1.15.3)
     globalid (0.5.2)
       activesupport (>= 5.0)
@@ -245,9 +257,10 @@ DEPENDENCIES
   bootsnap (>= 1.4.4)
   byebug
   capybara (>= 3.26)
+  database_cleaner
   devise
   factory_bot_rails
-  faker
+  faker!
   jbuilder (~> 2.7)
   listen (~> 3.3)
   pg
