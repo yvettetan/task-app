@@ -21,6 +21,9 @@ a, button, select {
 .bg-primary {
     background: $primary-color !important;
 }
+.bg-body {
+    background: $body-color !important;
+}
 .text-primary {
     color: $primary-color !important;
 }
@@ -68,4 +71,24 @@ p {
     position: absolute;
     top: 4em;
     left: 2em;
+}
+
+#homepage {
+    width: 100vw;
+    height: 100%;
+}
+.active {
+    border: 1px solid $primary-color;
+    border-radius: 3px
+}
+.dropdown-menu a{
+    color: #FFFFFF !important;
+    &:hover {
+        color: $primary-color !important;
+    }
+}
+.navbar-toggler-icon {
+    color: $primary-color;
+    width: auto;
+    height: auto;
 }
