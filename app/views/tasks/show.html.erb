@@ -21,7 +21,7 @@
           <%= @task.due_at.strftime("%b %d, %Y") %>
         </p>
       </div>
-      <%= link_to "View all #{@task.category.title} tasks", category_path(@category.id), class: 'link-primary float-end' %>
+      <%= link_to "View all #{@task.category.title} tasks", category_path(@category.id), class: 'link-secondary float-end' %>
     </div>
   </div>
 </section>
