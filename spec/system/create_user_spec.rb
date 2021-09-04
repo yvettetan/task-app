@@ -16,8 +16,11 @@ RSpec.describe "Creating User", driver: :selenium_chrome, js: true do
 
   describe "Creating an invalid User" do
     it "is invalid email already taken" do
+      user = FactoryBot.create(:user)
+      login_as(user)
+      logout
       visit new_user_registration_path
-      fill_in "Email", with: "testt@gmail.com"
+      fill_in "Email", with: user.email
       fill_in "Password", with: "paul091725"
       fill_in "Password confirmation", with: "paul091725"
       click_on "Sign up"

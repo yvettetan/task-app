@@ -9,16 +9,16 @@ RSpec.describe 'Creating Tasks', type: :system, driver: :selenium_chrome, js: tr
   describe 'Creating a valid Task' do
     it 'successfully creates a new task with name, description and due date' do
       visit category_path(@category.id)
-      click_on 'Create Task'
+      find("a", text: "New Task").click
       fill_in 'Name', with: 'Name'
       fill_in 'Description', with: 'Description'
       page.find('#task_due_at').click
-      page.find('span', text: '30').click
+      page.find('span', text: '10').click
       click_on 'Create Task'
       expect(page).to have_current_path category_path(@category.id)
       expect(page).to have_content('Name')
       expect(page).to have_content('Description')
-      expect(page).to have_content(Date.today.strftime('%b 30, %Y').to_s)
+      expect(page).to have_content(Date.today.strftime('%b 10, %Y').to_s)
       task = Task.order('id').last
       expect(task.name).to eq('Name')
       expect(task.description).to eq('Description')

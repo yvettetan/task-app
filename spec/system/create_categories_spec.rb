@@ -17,15 +17,15 @@ RSpec.describe 'Creating Categories', driver: :selenium_chrome, js: true do
   describe 'Creating a valid Category' do
     it 'successfully creates a new category' do
       visit categories_path
-      click_on 'New Category'
+      click_link 'New Category'
       expect(page).to have_current_path new_category_path
       within 'form' do
         fill_in 'Title', with: 'title'
         fill_in 'Description', with: 'description'
         click_on 'Create Category'
       end
-      expect(page).to have_content('title')
-      expect(page).to have_content('description')
+      expect(page).to have_content(/title/i)
+      expect(page).to have_content(/title/i)
       expect(page).to have_text('Category was successfully created')
       category = Category.order('id').last
       expect(category.title).to eq('title')

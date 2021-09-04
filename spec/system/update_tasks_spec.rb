@@ -10,19 +10,19 @@ RSpec.describe 'Updating Tasks', type: :system, driver: :selenium_chrome, js: tr
                                   category_id: category.id, user_id: user.id)
       category.save
       visit category_task_path(category, task)
-      click_on 'Edit'
+      page.find('a', class: 'fa-edit').click
       fill_in 'Name', with: 'Laundry'
-      fill_in 'Description', with: 'sort, wash, dry and fold clothes'
+      fill_in 'Description', with: 'Sort, wash, dry and fold clothes'
       page.find('#task_due_at').click
-      page.find('span', text: '30').click
+      page.find('span', text: '10').click
       click_on 'Update Task'
       expect(page).to have_current_path category_path(category.id)
       expect(page).to have_content('Laundry')
-      expect(page).to have_content('sort, wash, dry and fold clothes')
-      expect(page).to have_content(Date.today.strftime('%b 30, %Y').to_s)
+      expect(page).to have_content('Sort, wash, dry and fold clothes')
+      expect(page).to have_content(Date.today.strftime('%b 10, %Y').to_s)
       updated_task = Task.find(task.id)
       expect(updated_task.name).to eq('Laundry')
-      expect(updated_task.description).to eq('sort, wash, dry and fold clothes')
+      expect(updated_task.description).to eq('Sort, wash, dry and fold clothes')
       expect(task.due_at).not_to be_nil
     end
   end
