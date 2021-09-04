@@ -4,16 +4,25 @@
     <div>
       <h1 class='fs-3'><%= @category.title.humanize %></h1>
       <p class='fs-6 text-muted'><%= @category.description.humanize %></p>
-      <%= link_to 'Edit Category', edit_category_path(@category), class: 'text-warning'  %>
     </div>
-    <button class= 'btn btn-secondary'>
-      <i class="fas fa-plus"></i>
-      <%= link_to "New Task", new_category_task_path(@category), class: 'text-white' %>
-    </button>
+    <%= link_to(edit_category_path(@category)) do %>
+      <button class='btn btn-warning btn-sm text-white'>
+        <i class="far fa-edit"></i>
+        Edit Category
+      </button>
+    <% end %>
   </div>
   <hr>
   <div class='container'>
-    <h1 class='fs-5'>List of Tasks</h1>
+    <div class="d-flex justify-content-between align-items-center flex-wrap">
+      <h1 class='fs-5'>List of Tasks</h1>
+      <%= link_to(new_category_task_path(@category)) do %>
+        <button class='btn btn-secondary btn-sm'>
+          <i class="fas fa-plus"></i>
+          New Task
+        </button>
+      <% end %>
+    </div>
     <table class="table table-striped mb-4">
       <thead>
         <tr class="table-header">
