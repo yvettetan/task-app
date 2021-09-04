@@ -35,7 +35,8 @@
         <div class="field">
           <%= f.number_field :user_id, id: :task_user_id, value: current_user.id, type: :hidden %>
         </div>
-        <div class="actions mt-4">
+        <div class="actions d-flex justify-content-between align-items-center mt-4">
+          <%= link_to 'Back', 'javascript:history.back()', class: 'btn btn-outline-dark' %>
           <%= f.submit class: 'btn btn-secondary float-end' %>
         </div>
       <% end %>
