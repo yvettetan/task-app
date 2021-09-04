@@ -1,28 +1,35 @@
 <section class='main-section'>
   <div class="d-flex justify-content-between align-items-center container">
     <h1 class="fs-4">List of Categories</h1>
-    <button class= 'btn btn-secondary'>
-      <i class="fas fa-plus"></i>
-      <%= link_to "New Category", new_category_path, class: 'text-white' %>
-    </button>
+    <%= link_to(new_category_path) do %>
+      <button class='btn btn-secondary'>
+        <i class="fas fa-plus"></i>
+        New Category
+      </button>
+    <% end %>
   </div>
-  <div class="row my-2 g-2 container-fluid">
+  <div class="row my-2 g-4 container-fluid">
     <% @categories.each do |category| %>
-      <div class="card col-md-6 col-lg-4">
-        <div class="card-body">
-          <div class="d-flex justify-content-between align-items-center flex-wrap">
-            <h2 class="fs-5"><%= link_to "#{category.title.humanize}", category %></h2>
-            <div>
-              <%= link_to "", edit_category_path(category), class: 'text-warning far fa-edit' %> |
-              <%= link_to "", category_path(category.id),
+      <div class="list-group my-2 col-md-6 col-lg-4">
+        <label class="list-group-item d-flex shadow-sm">
+          <span class="p-0 container-fluid">
+            <div class='d-flex justify-content-between'>
+              <h2 class="fs-5"><%= link_to "#{category.title.humanize}", category %></h2>
+              <div>
+                <%= link_to "", edit_category_path(category), class: 'text-warning far fa-edit' %> |
+                <%= link_to "", category_path(category.id),
                           class: 'text-danger far fa-trash-alt',
                           method: :delete,
                           data: { confirm: "Are you sure you want to delete #{category.title}?" } %>
+              </div>
             </div>
-          </div>
-          <p class="text-muted"><%= category.description.humanize %></p>
-          <span>Tasks: <%= category.tasks.count %></span>
-        </div>
+            <hr class="mt-0">
+            <p><%= truncate(category.description.humanize, length: 50) %></p>
+            <small class="d-block">
+              <span>Tasks: <%= category.tasks.count %></span>
+            </small>
+          </span>
+        </label>
       </div>
     <% end %>
   </div>
