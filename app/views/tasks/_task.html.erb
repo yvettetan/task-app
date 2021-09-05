@@ -18,14 +18,14 @@
             <%= link_to(undo_task_path(task.id), method: :patch) do %>
               <span>
                 <i class="fa fa-check-circle text-success"></i>
-                <del><%= task.name %></del>
+                <del><%= task.name.humanize %></del>
               </span>
             <% end %>
           <% else %>
             <%= link_to(complete_task_path(task.id), method: :patch) do %>
               <span>
                 <i class="far fa-circle"></i>
-                <%= task.name %>
+                <%= task.name.humanize %>
               </span>
             <% end %>
           <% end %>
