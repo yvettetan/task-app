@@ -48,14 +48,17 @@ class TasksController < ApplicationController
     @task = Task.find(params[:id])
     # @task.update_attribute(:completed => params[:completed])
     @task.update(completed: true)
-    redirect_to tasks_path
+    # redirect_to tasks_path if controller_name?(index)
+    session[:return_to] ||= request.referer
+    redirect_to session.delete(:return_to)
   end
 
   def undo
     @task = Task.find(params[:id])
     # @task.update_attribute(:completed => params[:completed])
     @task.update(completed: false)
-    redirect_to tasks_path
+    session[:return_to] ||= request.referer
+    redirect_to session.delete(:return_to)
   end
 
   private
