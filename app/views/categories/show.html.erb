@@ -1,7 +1,12 @@
 <section class='main-section'>
-  <%= link_to 'Back to categories', categories_path, class: 'btn btn-outline-dark' %>
-  <div class="container d-flex justify-content-between align-items-center flex-wrap mt-4">
-    <div>
+  <div class="container d-flex justify-content-around align-items-center flex-wrap mt-4">
+    <%= link_to(categories_path) do %>
+      <button class='btn btn-secondary btn-sm text-white'>
+        <i class="fas fa-arrow-left"></i>
+        All categories
+      </button>
+    <% end %>
+    <div class='text-center mt-4'>
       <h1 class='fs-3'><%= @category.title.humanize %></h1>
       <p class='fs-6 text-muted'><%= @category.description.humanize %></p>
     </div>
@@ -14,42 +19,56 @@
   </div>
   <hr>
   <div class='container'>
-    <div class="d-flex justify-content-between align-items-center flex-wrap">
-      <h1 class='fs-5'>List of Tasks</h1>
-      <%= link_to(new_category_task_path(@category)) do %>
-        <button class='btn btn-secondary btn-sm'>
-          <i class="fas fa-plus"></i>
-          New Task
-        </button>
-      <% end %>
-    </div>
-    <table class="table table-striped mb-4">
-      <thead>
-        <tr class="table-header">
-          <th>Name</th>
-          <th>Description</th>
-          <th>Due Date</th>
-          <th colspan="3" class="text-center">Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @category.tasks.order(due_at: :asc).each do |task| %>
-          <% if task.persisted? %> <%# to only display tasks saved in the database %>
-            <tr>
-              <td><%= task.name.humanize %></td>
-              <td><%= truncate(task.description.humanize, length: 60) %></td>
-              <td><%= task.due_at.strftime("%b %d, %Y") %></td>
-              <td class='text-center'><%= link_to "", [task.category, task], class:'fas fa-eye text-primary' %></td>
-              <td class='text-center'><%= link_to "", edit_category_task_path(task.category, task), class:'far fa-edit text-warning' %></td>
-              <td class='text-center'><%= link_to "", category_task_path(task.category, task),
+    <%= link_to(new_category_task_path(@category), class: 'float-end mt-2 mb-4') do %>
+      <button class='btn btn-primary btn-sm'>
+        <i class="fas fa-plus"></i>
+        New Task
+      </button>
+    <% end %>
+    <div class='col-md-8 col-lg-6 mx-auto'>
+      <table class="table table-striped my-4 border shadow-sm mx-auto">
+        <thead class='text-center'>
+          <tr class="table-header bg-primary text-white">
+            <th>List of Tasks</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @category.tasks.order(due_at: :asc).each do |task| %>
+            <% if task.persisted? %> <%# to only display tasks saved in the database %>
+              <tr>
+                <td><% if task.completed %>
+                    <%= link_to(undo_task_path(task.id), method: :patch) do %>
+                      <span>
+                        <i class="fa fa-check-circle text-success"></i>
+                        <del class='fs-5 mt-2'><%= task.name.humanize %></del>
+                      </span>
+                    <% end %>
+                    <%= link_to "", [task.category, task], class:'fas fa-eye text-primary float-end' %>
+                  <% else %>
+                    <%= link_to(complete_task_path(task.id), method: :patch) do %>
+                      <span class='fs-5 mt-2'>
+                        <i class="far fa-circle"></i>
+                        <%= task.name.humanize %>
+                      </span>
+                    <% end %>
+                    <%= link_to "", [task.category, task], class:'fas fa-eye text-primary float-end' %>
+                  <% end %>
+                  <p class='m-0 d-block'><%= truncate(task.description.humanize, length: 60) %></p>
+                  <hr class='m-2'>
+                  <small>Due: <%= task.due_at.strftime("%b %d, %Y") %></small>
+                  <div class='float-end'>
+                    <%= link_to "", edit_category_task_path(task.category, task), class:'far fa-edit text-warning' %> |
+                    <%= link_to "", category_task_path(task.category, task),
               class:'far fa-trash-alt text-danger',
               method: :delete,
               data: { confirm: "Are you sure you want to delete #{task.name}?" } %>
-              </td>
-            </tr>
+                  </div>
+                </td>
+              </tr>
+            <% end %>
           <% end %>
-        <% end %>
-      </tbody>
-    </table>
+        </tbody>
+      </table>
+    </div>
   </div>
 </section>
