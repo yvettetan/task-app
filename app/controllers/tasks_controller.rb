@@ -1,8 +1,9 @@
 class TasksController < ApplicationController
-  before_action :set_category, except: %i[index]
+  before_action :set_category, except: %i[index complete undo]
   before_action :set_task, only: %i[show edit update destroy]
   before_action :authenticate_user!
   before_action :correct_user, only: %i[show edit update destroy]
+  skip_before_action :verify_authenticity_token
 
   def index
     @tasks = current_user.tasks
@@ -41,6 +42,20 @@ class TasksController < ApplicationController
   def correct_user
     @task = current_user.tasks.find_by(id: params[:id])
     redirect_to tasks_path, notice: '404 not found' if @task.nil?
+  end
+
+  def complete
+    @task = Task.find(params[:id])
+    # @task.update_attribute(:completed => params[:completed])
+    @task.update(completed: true)
+    redirect_to tasks_path
+  end
+
+  def undo
+    @task = Task.find(params[:id])
+    # @task.update_attribute(:completed => params[:completed])
+    @task.update(completed: false)
+    redirect_to tasks_path
   end
 
   private
