@@ -8,11 +8,28 @@
             <span class="badge bg-primary"><%= link_to "#{task.category.title}", category_path(task.category.id), class:'text-white'   %></span>
           </div>
           <div>
+            <%= link_to '', [task.category, task], class:'fas fa-eye text-primary' %> |
             <%= link_to '', edit_category_task_path(task.category, task), class: 'text-warning far fa-edit' %> |
             <%= link_to '', [task.category, task], class: 'text-danger far fa-trash-alt', method: :delete, data: { confirm: "Are you sure you want to delete #{task.name}?" } %>
           </div>
         </div>
-        <strong><%= link_to "#{task.name}", [task.category, task] %></strong>
+        <div class='form-group mt-2'>
+          <% if task.completed %>
+            <%= link_to(undo_task_path(task.id), method: :patch) do %>
+              <span>
+                <i class="fa fa-check-circle text-success"></i>
+                <del><%= task.name %></del>
+              </span>
+            <% end %>
+          <% else %>
+            <%= link_to(complete_task_path(task.id), method: :patch) do %>
+              <span>
+                <i class="far fa-circle"></i>
+                <%= task.name %>
+              </span>
+            <% end %>
+          <% end %>
+        </div>
         <small class="d-block text-muted">
           <%= truncate(task.description, length: 80) %>
         </small>
