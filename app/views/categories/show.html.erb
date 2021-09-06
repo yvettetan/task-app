@@ -37,7 +37,7 @@
             <% if task.persisted? %> <%# to only display tasks saved in the database %>
               <tr>
                 <td><% if task.completed %>
-                    <%= link_to(undo_task_path(task.id), method: :patch) do %>
+                    <%= link_to(undo_task_path(task.id), method: :patch, remote: true) do %>
                       <span>
                         <i class="fa fa-check-circle text-success"></i>
                         <del class='fs-5 mt-2'><%= task.name.humanize %></del>
@@ -45,7 +45,7 @@
                     <% end %>
                     <%= link_to "", [task.category, task], class:'fas fa-eye text-primary float-end' %>
                   <% else %>
-                    <%= link_to(complete_task_path(task.id), method: :patch) do %>
+                    <%= link_to(complete_task_path(task.id), method: :patch, remote: true) do %>
                       <span class='fs-5 mt-2'>
                         <i class="far fa-circle"></i>
                         <%= task.name.humanize %>
