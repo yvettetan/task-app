@@ -7,7 +7,7 @@ RSpec.describe 'Updating Categories', type: :system, driver: :selenium_chrome, j
       login_as(user)
       category = Category.create!(title: 'Home', description: 'daily tasks at home', user_id: user.id)
       visit category_path(category.id)
-      click_on 'Edit Category'
+      click_link 'Edit Category'
       within 'form' do
         fill_in 'Title', with: 'School Assignments'
         fill_in 'Description', with: 'Daily assignments for school'
