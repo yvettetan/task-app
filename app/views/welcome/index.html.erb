@@ -1,0 +1,18 @@
+<section id='homepage' class='container-center'>
+  <div class="container col-xxl-8 px-4 py-5">
+    <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+      <div class="col-10 col-sm-8 col-lg-6">
+        <%= image_tag('/mobile-notes-list.svg', class:'d-block mx-lg-auto img-fluid' ) %>
+      </div>
+      <div class="col-lg-6">
+        <h1 class="display-5 fw-bold lh-1 mb-3">Focus on what matters most.</h1>
+        <p class="lead">Accomplishing your goals is just a note away.</p>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+          <%= link_to(new_user_registration_path) do %>
+            <button class='btn btn-primary btn-lg px-4 me-md-2'><i class="fas fa-pen-alt"></i> Get Started</button>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
