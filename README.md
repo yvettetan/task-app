@@ -53,10 +53,12 @@ This project was built with:
 ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?&logo=html5&logoColor=white) ![SASS](https://img.shields.io/badge/SASS-hotpink.svg?&logo=SASS&logoColor=white) ![JavaScript](https://img.shields.io/badge/JavaScript%20-%23F7DF1E.svg?logo=javascript&logoColor=black) ![Ruby](https://img.shields.io/badge/ruby-%23CC342D.svg?&logo=ruby&logoColor=white) ![Rails](https://img.shields.io/badge/rails-%23CC0000.svg?&logo=ruby-on-rails&logoColor=white) ![Bootstrap](https://img.shields.io/badge/bootstrap-%23563D7C.svg?&logo=bootstrap&logoColor=white) ![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?&logo=postgresql&logoColor=white)
 
 - Icons from [Font Awesome](https://fontawesome.com/)
-- Illustration form [Storyset](https://storyset.com/)
+- Illustration from [Storyset](https://storyset.com/)
+- Datetime picker from [flatpickr](https://flatpickr.js.org/)
 
 ## Resources and References
 
 - [Rails Guides](https://guides.rubyonrails.org/v6.1/getting_started.html)
 - [rspec-rails documentation](https://relishapp.com/rspec/rspec-rails/docs)
 - [Test Driven Development with RSpec in Rails](https://dev.to/redvanisation/test-driven-development-with-rspec-in-rails-4ek8e)
+- [Devise gem for authentication](https://github.com/heartcombo/devise)
