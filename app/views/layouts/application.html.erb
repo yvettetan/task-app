@@ -15,7 +15,7 @@
       <%= render 'layouts/notices' %>
     <% end %>
     <% if alert %>
-      <p class="alert text-alert"><%= alert %></p>
+      <%= render 'layouts/alerts' %>
     <% end %>
     <%= yield %>
   </body>
