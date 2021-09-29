@@ -14,12 +14,12 @@ RSpec.describe 'Updating Tasks', type: :system, driver: :selenium_chrome, js: tr
       fill_in 'Name', with: 'Laundry'
       fill_in 'Description', with: 'Sort, wash, dry and fold clothes'
       page.find('#task_due_at').click
-      page.find('span', text: '10').click
+      page.find('.today').click
       click_on 'Update Task'
       expect(page).to have_current_path category_path(category.id)
       expect(page).to have_content('Laundry')
       expect(page).to have_content('Sort, wash, dry and fold clothes')
-      expect(page).to have_content(Date.today.strftime('%b 10, %Y').to_s)
+      expect(page).to have_content(Date.today.strftime("%b %d, %Y").to_s)
       updated_task = Task.find(task.id)
       expect(updated_task.name).to eq('Laundry')
       expect(updated_task.description).to eq('Sort, wash, dry and fold clothes')
