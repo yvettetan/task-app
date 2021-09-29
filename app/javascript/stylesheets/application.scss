@@ -84,8 +84,9 @@ p {
 }
 .dropdown-menu a{
     color: #FFFFFF !important;
-    &:hover {
+    &:hover, &:active, &:focus {
         color: $primary-color !important;
+        background-color: #FFFFFF;
     }
 }
 .navbar-toggler-icon {
