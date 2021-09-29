@@ -4,6 +4,7 @@
       <div class="p-4 p-md-5">
         <h3 class="text-center mb-4">Log In</h3>
         <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+          <%= render "devise/shared/error_messages", resource: resource %>
           <div class="field mt-2">
             <%= f.label :email, class: 'form-label' %><br />
             <%= f.email_field :email, autofocus: true, autocomplete: "email", class:'form-control' %>
