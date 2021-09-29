@@ -34,7 +34,7 @@ Rails.application.configure do
   config.active_storage.service = :local
 
   # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = true
 
   config.action_mailer.perform_caching = false
 
@@ -75,5 +75,19 @@ Rails.application.configure do
   # config.action_cable.disable_request_forgery_protection = true
 
   # Devise config
+  config.action_mailer.perform_deliveries = true
   config.action_mailer.default_url_options = { host: "localhost", port: 3000 }
+
+  config.action_mailer.default_options = {from: ENV["MAILER_EMAIL"]}
+
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+  address:              'smtp.gmail.com',
+  port:                 587,
+  domain:               'smtp.gmail.com', #change to domain name
+  user_name:            ENV["MAILER_USERNAME"],
+  password:             ENV["MAILER_PASSWORD"],
+  authentication:       :login,
+  enable_starttls_auto: true,
+  }
 end
